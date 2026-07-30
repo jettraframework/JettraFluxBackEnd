@@ -1,4 +1,4 @@
-package com.facli.server;
+package com.flux.server;
 
 import io.jettra.rest.server.JettraRestServer;
 import io.jettra.server.JettraServer;
@@ -10,7 +10,7 @@ import io.jettra.server.openapi.OpenApiHandler;
 import io.jettra.server.openapi.SwaggerUIHandler;
 import java.util.ArrayList;
 import java.util.List;
-import com.facli.server.controller.ContenedorMaritimoController;
+import com.flux.server.controller.ContenedorMaritimoController;
 
 
 /**

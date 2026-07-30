@@ -1,6 +1,6 @@
-package com.facli.server.repository;
+package com.flux.server.repository;
 
-import com.facli.server.entity.ContenedorMaritimo;
+import com.flux.server.entity.ContenedorMaritimo;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;

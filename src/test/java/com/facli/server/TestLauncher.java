@@ -1,5 +1,6 @@
 package com.facli.server;
 
+import com.flux.server.App;
 import io.jettra.test.annotation.JettraTestLauncher;
 
 @JettraTestLauncher
