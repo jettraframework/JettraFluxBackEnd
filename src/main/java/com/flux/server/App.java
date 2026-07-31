@@ -36,7 +36,7 @@ public class App {
         IO.println("Iniciando aplicación Web: " + appTitle);
     }
 
-    void main(String[] args) {
+    public static void main(String[] args) {
         if (args != null && args.length > 0 && args[0].equals("-console")) {
             io.jettra.server.autentification.SecurityCLI.main(args);
             return;
@@ -70,7 +70,7 @@ public class App {
         JettraRestServer.registerDiscovered(server, App.class);
 
         // Registro manual para los que no se descubren automáticamente
-//        JettraRestServer.register(server, AuthController.class);
+        JettraRestServer.register(server, io.jettra.server.autentification.controller.AuthentificationController.class);
         server.start();
 
     }

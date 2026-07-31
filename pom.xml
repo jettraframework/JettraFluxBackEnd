@@ -22,6 +22,7 @@
         <jettra.rest.version>1.0.0-SNAPSHOT</jettra.rest.version>
         <jettra.json.version>1.0.0-SNAPSHOT</jettra.json.version>
         <jettra.test.version>1.0.0-SNAPSHOT</jettra.test.version>
+          <main.class.path>com.flux.server.App</main.class.path>
     </properties>
 
     <dependencies>
@@ -101,7 +102,7 @@
                 <configuration>
                     <archive>
                         <manifest>
-                            <mainClass>com.facli.server.App</mainClass>
+                            <mainClass>${main.class.path}</mainClass>
                         </manifest>
                     </archive>
                 </configuration>
@@ -121,7 +122,7 @@
                             <createDependencyReducedPom>false</createDependencyReducedPom>
                             <transformers>
                                 <transformer implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
-                                    <mainClass>com.facli.server.App</mainClass>
+                                    <mainClass>${main.class.path}</mainClass>
                                 </transformer>
                                 <transformer implementation="org.apache.maven.plugins.shade.resource.AppendingTransformer">
                                     <resource>META-INF/jettra/discovered.classes</resource>

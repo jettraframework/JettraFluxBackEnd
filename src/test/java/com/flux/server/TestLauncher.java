@@ -1,4 +1,4 @@
-package com.facli.server;
+package com.flux.server;
 
 import com.flux.server.App;
 import io.jettra.test.annotation.JettraTestLauncher;

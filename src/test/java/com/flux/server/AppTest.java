@@ -1,4 +1,4 @@
-package com.facli.server;
+package com.flux.server;
 
 import io.jettra.server.discoverer.DiscoveredLoad;
 import io.jettra.test.annotation.JettraTest;
