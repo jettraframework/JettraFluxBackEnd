@@ -70,7 +70,7 @@ public class App {
         JettraRestServer.registerDiscovered(server, App.class);
 
         // Registro manual para los que no se descubren automáticamente
-        JettraRestServer.register(server, io.jettra.server.autentification.controller.AuthentificationController.class);
+//        JettraRestServer.register(server, AuthController.class);
         server.start();
 
     }
