@@ -45,13 +45,13 @@ public class App {
         App app = new App();
         app.initUI();
         // Configurar la ruta de redirección en ErrorPage, usando contextpath (y el puerto implícitamente por el host)
-        io.jettra.wui.complex.ErrorPage.path = "http://localhost:" + app.port + app.contextpath;
+        io.jettra.flux.complex.ErrorPage.path = "http://localhost:" + app.port + app.contextpath;
 
         IO.println("Levantando servidor de enrutamiento JettraServer empotrado...");
         JettraServer server = new JettraServer();
         server.setErrorPage("/error");
-        server.addHandler("/error", io.jettra.wui.complex.ErrorPage.class);
-        server.addHandler("/swagger-ui", io.jettra.wui.complex.SwaggerUIPage.class);
+        server.addHandler("/error", io.jettra.flux.complex.ErrorPage.class);
+        server.addHandler("/swagger-ui", io.jettra.flux.complex.SwaggerUIPage.class);
 
         // Cargamos los controladores descubiertos automáticamente
         List<Class<?>> controllers = new ArrayList<>(DiscoveredRegistry.getDiscoveredClasses(App.class));
