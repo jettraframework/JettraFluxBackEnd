@@ -9,7 +9,6 @@ import io.jettra.test.jwt.JwtTestClient;
 import io.jettra.core.inject.annotation.Inject;
 import com.flux.server.entity.ContenedorMaritimo;
 import io.jettra.rest.core.Response;
-import io.jettra.server.config.JettraConfigProperty;
 import java.util.List;
 import java.util.UUID;
 
@@ -18,15 +17,12 @@ import java.util.UUID;
 public class ContenedorMaritimoControllerTest {
 
     public Integer serverPortTest = 9050;
-    @JettraConfigProperty(name = "server.port")
-    private String port;
     @Inject
     ContenedorMaritimoController contenedorMaritimoController;
 
     @JettraTest
     public void testInjectedControllerMethods() {
         try {
-            serverPortTest =Integer.parseInt(port);
             // Test save()
             UUID newId = UUID.randomUUID();
             ContenedorMaritimo nuevoContenedor = new ContenedorMaritimo(newId, "Contenedor de Prueba", true);
@@ -53,7 +49,6 @@ public class ContenedorMaritimoControllerTest {
     public void testHttpEndpoints() {
         JwtTestClient jwtClient = new JwtTestClient();
         try {
-             serverPortTest =Integer.parseInt(port);
             // Autenticación con admin/admin
             String authPayload = "{\"username\":\"admin\", \"password\":\"admin\"}";
             String token = jwtClient.authenticate("http://localhost:" +serverPortTest + "/auth/login", authPayload);
