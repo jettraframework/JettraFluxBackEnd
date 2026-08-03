@@ -59,7 +59,7 @@ public class App {
         // Puedes agregar aquí manualmente las clases que tengan @Discovered(automatic=false)
         // o que no tengan la anotación
         // controllers.add(MiControladorManual.class);
-        controllers.add(ContenedorMaritimoController.class);
+        //controllers.add(ContenedorMaritimoController.class);
         // Exponer el JSON de OpenAPI
         server.addHandler("/openapi.json", new OpenApiHandler(controllers));
 
