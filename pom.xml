@@ -16,7 +16,7 @@
         <jettra.jwt.version>1.0.0-SNAPSHOT</jettra.jwt.version>
         <jettra.gprc.version>1.0.0-SNAPSHOT</jettra.gprc.version>
         <jettra.rules.version>1.0.0-SNAPSHOT</jettra.rules.version>
-        <jettra.appserver.version>1.0.0-SNAPSHOT</jettra.appserver.version>
+        <jettra.ee.version>1.0.0-SNAPSHOT</jettra.ee.version>
         <jettra.flux.version>1.0.0-SNAPSHOT</jettra.flux.version>
         <jettra.report.version>1.0.0-SNAPSHOT</jettra.report.version>
         <jettra.rest.version>1.0.0-SNAPSHOT</jettra.rest.version>
@@ -36,8 +36,8 @@
         <!-- Servidor backend subyacente -->
         <dependency>
             <groupId>io.jettra</groupId>
-            <artifactId>JettraAppServer</artifactId>
-            <version>${jettra.appserver.version}</version>
+            <artifactId>JettraEE</artifactId>
+            <version>${jettra.ee.version}</version>
         </dependency>
         
         <dependency>
