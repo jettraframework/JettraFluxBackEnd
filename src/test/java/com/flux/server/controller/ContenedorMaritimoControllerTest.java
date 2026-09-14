@@ -6,9 +6,9 @@ import io.jettra.test.annotation.JettraTest;
 import io.jettra.test.annotation.RequiresRunningServer;
 import io.jettra.test.core.JettraAssert;
 import io.jettra.test.jwt.JwtTestClient;
-import io.jettra.core.inject.annotation.Inject;
+import jakarta.inject.Inject;
 import com.flux.server.entity.ContenedorMaritimo;
-import io.jettra.rest.core.Response;
+import jakarta.ws.rs.core.Response;
 import java.util.List;
 import java.util.UUID;
 

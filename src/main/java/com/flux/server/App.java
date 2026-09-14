@@ -1,40 +1,12 @@
 package com.flux.server;
 
-import io.jettra.rest.server.JettraRestServer;
-import io.jettra.server.JettraServer;
-import io.jettra.server.config.ConfigInjector;
-import io.jettra.server.config.JettraConfigProperty;
-import io.jettra.server.discoverer.DiscoveredLoad;
-import io.jettra.server.discoverer.DiscoveredRegistry;
-import io.jettra.server.openapi.OpenApiHandler;
-import io.jettra.server.openapi.SwaggerUIHandler;
-import java.util.ArrayList;
-import java.util.List;
-import com.flux.server.controller.ContenedorMaritimoController;
+import io.jettra.ee.JettraEE;
+import io.jettra.ee.server.JettraEEServer;
+import org.eclipse.microprofile.config.ConfigProvider;
 
-
-/**
- * App!
- *
- */
-/**
- * Hello world!
- *
- */
-@DiscoveredLoad
 public class App {
 
-    @JettraConfigProperty(name = "app.title")
-    private String appTitle;
-    @JettraConfigProperty(name = "server.port")
-    private String port;
-    @JettraConfigProperty(name = "server.contextpath")
-    private String contextpath;
-    public static JettraServer serverInstance;
-    public void initUI() {
-        ConfigInjector.inject(this);
-        IO.println("Iniciando aplicación Web: " + appTitle);
-    }
+    public static JettraEEServer serverInstance;
 
     public static void main(String[] args) {
         if (args != null && args.length > 0 && args[0].equals("-console")) {
@@ -42,37 +14,38 @@ public class App {
             return;
         }
 
-        App app = new App();
-        app.initUI();
-        // Configurar la ruta de redirección en ErrorPage, usando contextpath (y el puerto implícitamente por el host)
-        io.jettra.flux.complex.ErrorPage.path = "http://localhost:" + app.port + app.contextpath;
+        int port = 8080;
+        String contextPath = "/";
 
-        IO.println("Levantando servidor de enrutamiento JettraServer empotrado...");
-        JettraServer server = new JettraServer();
-        server.setErrorPage("/error");
-        server.addHandler("/error", io.jettra.flux.complex.ErrorPage.class);
-        server.addHandler("/swagger-ui", io.jettra.flux.complex.SwaggerUIPage.class);
+        try {
+            var cfg = ConfigProvider.getConfig();
+            port = cfg.getOptionalValue("server.port", Integer.class).orElse(port);
+            contextPath = cfg.getOptionalValue("server.contextpath", String.class).orElse(contextPath);
+        } catch (Exception ignored) {}
 
-        // Cargamos los controladores descubiertos automáticamente
-        List<Class<?>> controllers = new ArrayList<>(DiscoveredRegistry.getDiscoveredClasses(App.class));
+        if (args != null) {
+            for (int i = 0; i < args.length; i++) {
+                if ("--port".equals(args[i]) && i + 1 < args.length) {
+                    port = Integer.parseInt(args[++i]);
+                } else if ("--context-path".equals(args[i]) && i + 1 < args.length) {
+                    contextPath = args[++i];
+                }
+            }
+        }
 
-        // Puedes agregar aquí manualmente las clases que tengan @Discovered(automatic=false)
-        // o que no tengan la anotación
-        // controllers.add(MiControladorManual.class);
-        //controllers.add(ContenedorMaritimoController.class);
-        // Exponer el JSON de OpenAPI
-        server.addHandler("/openapi.json", new OpenApiHandler(controllers));
+        // Configurar la ruta de redirección en ErrorPage, usando contextpath
+        io.jettra.flux.complex.ErrorPage.path = "http://localhost:" + port + contextPath;
 
-        // Exponer la interfaz Swagger UI
-        server.addHandler("/swagger-ui", new SwaggerUIHandler("/openapi.json"));
+        System.out.println("Levantando servidor JettraEE en puerto " + port + "...");
 
-        // Registrar los controladores descubiertos en JettraRestServer
-        JettraRestServer.registerDiscovered(server, App.class);
+        serverInstance = JettraEE.builder()
+                .port(port)
+                .contextPath(contextPath)
+                .title("JettraFluxBackEnd API")
+                .version("1.0.0")
+                .scanPackages("com.flux", "jcf")
+                .build();
 
-        // Registro manual para los que no se descubren automáticamente
-//        JettraRestServer.register(server, AuthController.class);
-        server.start();
-
+        serverInstance.start();
     }
-
 }

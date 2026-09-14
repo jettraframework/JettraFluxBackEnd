@@ -19,7 +19,6 @@
         <jettra.ee.version>1.0.0-SNAPSHOT</jettra.ee.version>
         <jettra.flux.version>1.0.0-SNAPSHOT</jettra.flux.version>
         <jettra.report.version>1.0.0-SNAPSHOT</jettra.report.version>
-        <jettra.rest.version>1.0.0-SNAPSHOT</jettra.rest.version>
         <jettra.json.version>1.0.0-SNAPSHOT</jettra.json.version>
         <jettra.test.version>1.0.0-SNAPSHOT</jettra.test.version>
           <main.class.path>com.flux.server.App</main.class.path>
@@ -60,11 +59,7 @@
             <artifactId>JettraJWT</artifactId>
             <version>${jettra.jwt.version}</version>
         </dependency>
-        <dependency>
-            <groupId>io.jettra</groupId>
-            <artifactId>JettraRest</artifactId>
-            <version>${jettra.rest.version}</version>
-        </dependency>
+      
         <dependency>
             <groupId>io.jettra</groupId>
             <artifactId>JettraAnnotation</artifactId>
@@ -78,6 +73,12 @@
             <dependency>
             <groupId>io.jettraflux.minuevoplugin</groupId>
             <artifactId>MiNuevoPlugin</artifactId>
+            <exclusions>
+                <exclusion>
+                    <groupId>io.jettra</groupId>
+                    <artifactId>JettraRest</artifactId>
+                </exclusion>
+            </exclusions>
             <version>1.0-SNAPSHOT</version>
         </dependency>
     </dependencies>
